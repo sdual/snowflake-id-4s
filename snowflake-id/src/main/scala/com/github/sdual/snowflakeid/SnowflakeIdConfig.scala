@@ -2,16 +2,12 @@ package com.github.sdual.snowflakeid
 
 import java.net.NetworkInterface
 
-class SnowflakeIdConfig(customEpoch: Long = ConfigParam.DEFAULT_EPOCH, nodeId: Long) {
-
-  def this(customEpoch: Long) {
-    this(customEpoch, ConfigParam.createNodeIdFromMacAddress())
-  }
-
-}
+case class SnowflakeIdConfig(customEpoch: Long = ConfigParam.DEFAULT_EPOCH,
+                             nodeId: Long = ConfigParam.NODE_ID)
 
 object ConfigParam {
-  val DEFAULT_EPOCH = 1420070400000L // 2015-01-01T00:00:00Z
+  val DEFAULT_EPOCH: Long = 1420070400000L // 2015-01-01T00:00:00Z
+  lazy val NODE_ID: Long = createNodeIdFromMacAddress()
 
   def createNodeIdFromMacAddress(): Long = {
     val networkInterfaces: java.util.Enumeration[NetworkInterface] = NetworkInterface.getNetworkInterfaces
