@@ -25,8 +25,6 @@ object ConfigParam {
       } else {
         octalString.hashCode
       }
-
-
     }
 
     loop(networkInterfaces, "")
