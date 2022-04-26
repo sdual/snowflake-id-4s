@@ -14,16 +14,16 @@ object ConfigParam {
     val networkInterfaces: java.util.Enumeration[NetworkInterface] = NetworkInterface.getNetworkInterfaces
 
     @tailrec
-    def loop(nis: java.util.Enumeration[NetworkInterface], hexStr: String): Long = {
+    def loop(nis: java.util.Enumeration[NetworkInterface], octalString: String): Long = {
 
       if (networkInterfaces.hasMoreElements) {
         Option(nis.nextElement().getHardwareAddress) match {
           case Some(macAddress) =>
-            loop(nis, macAddress.toList.foldLeft("")((hexStr, byte) => hexStr + String.format("%02X", byte)))
-          case _ => loop(nis, hexStr)
+            loop(nis, macAddress.toList.foldLeft("")((octStr, byte) => octStr + String.format("%02X", byte)))
+          case _ => loop(nis, octalString)
         }
       } else {
-        hexStr.hashCode
+        octalString.hashCode
       }
 
 
