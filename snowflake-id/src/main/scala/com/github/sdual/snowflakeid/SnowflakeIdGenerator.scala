@@ -1,6 +1,6 @@
 package com.github.sdual.snowflakeid
 
-class SnowflakeIdGenerator {
+class SnowflakeIdGenerator(config: SnowflakeIdConfig) {
 
   def generate(): Long = {
     ???
@@ -9,5 +9,12 @@ class SnowflakeIdGenerator {
 }
 
 object SnowflakeIdGenerator {
-  def apply(): SnowflakeIdGenerator = new SnowflakeIdGenerator()
+
+  def apply(): SnowflakeIdGenerator = new SnowflakeIdGenerator(SnowflakeIdConfig())
+
+  def apply(nodeId: Long): SnowflakeIdGenerator =
+    new SnowflakeIdGenerator(SnowflakeIdConfig(nodeId = nodeId))
+
+  def apply(config: SnowflakeIdConfig): SnowflakeIdGenerator = new SnowflakeIdGenerator(config)
+
 }
